@@ -1,9 +1,12 @@
 // Criando a estrutura da aplicação
 
-const express = require("express");
-// Na nova versão do JS poderia ser chamado da seguinte forma:
-// import express form 'express';
-const routes = require("./routes");
+import express from 'express';
+// Sintaxe nova permitida usar por causa do sucrase
+// Sintaxe antiga: const express = require("express");
+
+import routes from './routes';
+
+import './database';
 
 class App {
   // Método constructor é chamado automaticamente quando a classe é instanciada.
@@ -24,5 +27,4 @@ class App {
     // As rotas também são middlewares. Por isso pode chamar dentro do use.
   }
 }
-
-module.exports = new App().server;
+export default new App().server;
