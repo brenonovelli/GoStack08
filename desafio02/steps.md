@@ -17,28 +17,28 @@
 
 
 ### Express
-`yarn add express`
+* `yarn add express`
 
 ### Nodemon
-`yarn add nodemon -D`
+* `yarn add nodemon -D`
 * Add on Package.json:
-```json
-"scripts": {
-    "dev": "nodemon src/server.js"
-  },
-```
+  ```json
+  "scripts": {
+      "dev": "nodemon src/server.js"
+    },
+  ```
 
 ### Sucrase
-`yarn add sucrase -D`
+* `yarn add sucrase -D`
 * Create new file on root: nodemon.json.
 * Script to run Sucrase not Node when running Nodemon:
-```json
-{
-"execMap": {
-  "js": "sucrase-node"
+  ```json
+  {
+  "execMap": {
+    "js": "sucrase-node"
+    }
   }
-}
-```
+  ```
 
 ### Sequelize
 * `yarn add sequelize`
