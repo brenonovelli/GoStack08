@@ -1,32 +1,34 @@
 # GoStack - Desafio 02
 
-## Estrutura sugerida
+## Suggested structure
 
-## Scripts e configs
+## Scripts and configs
   ### Nodemon + sucrase
-  Package.json
-    Add:
-      ```
-      "scripts": {
-          "dev": "nodemon src/server.js"
-        },
-      ```
+  **Add on Package.json**
+  ```json
+  "scripts": {
+      "dev": "nodemon src/server.js"
+    },
+  ```
 
-  New file on root: nodemon.json
-    Content:
-    ```
-    {
-    "execMap": {
-      "js": "sucrase-node"
-      }
+  **Create new file on root: nodemon.json**
+  
+  Rodar Sucrase ao chamar o *Nodemon* e não o Node.
+  ```json
+  {
+  "execMap": {
+    "js": "sucrase-node"
     }
-    ```
+  }
+  ```
 
 
 
-## Todos os comandos usados no terminal
+## All commands used in the Terminal
 
   `yarn init -y`
+
   `yarn add express`
+
   `yarn add sucrase nodemon -D`
 
