@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-
+// YUP -> JavaScript object schema validator and object parser.
 import User from '../models/User';
 
 class UserController {
@@ -17,6 +17,7 @@ class UserController {
     });
 
     if (!(await schema.isValid(req.body))) {
+      // Pega o req.body e compara com a const schema
       return res.status(400).json({ error: 'Validation fails' });
     }
 
@@ -26,6 +27,7 @@ class UserController {
       return res.status(400).json({ error: 'User already exists.' });
     }
 
+    // Desestruturando a req.body
     const { id, name, email, provider } = await User.create(req.body);
 
     return res.json({
@@ -56,8 +58,10 @@ class UserController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
+    // Pega o digitado na requisição
     const { email, oldPassword } = req.body;
 
+    // Pegando os dados do usário no banco
     const user = await User.findByPk(req.userId);
 
     // Checando se o nome e-mail é diferente do existente
