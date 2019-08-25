@@ -4,17 +4,17 @@
 
 ## Scripts e configs
   ### Nodemon + sucrase
-    Package.json
+  Package.json
     Add:
-      ```json
+      ```
       "scripts": {
           "dev": "nodemon src/server.js"
         },
       ```
 
-    New file on root: nodemon.json
+  New file on root: nodemon.json
     Content:
-    ```json
+    ```
     {
     "execMap": {
       "js": "sucrase-node"
