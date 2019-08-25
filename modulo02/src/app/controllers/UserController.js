@@ -58,7 +58,7 @@ class UserController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // Pega o digitado na requisição
+    // Pegando o digitado na requisição
     const { email, oldPassword } = req.body;
 
     // Pegando os dados do usário no banco
@@ -66,7 +66,7 @@ class UserController {
 
     // Checando se o nome e-mail é diferente do existente
     if (email !== user.email) {
-      // Checando se usuário já existe
+      // Checando se email já está cadastrado no banco
       const userExist = await User.findOne({ where: { email } });
       if (userExist) {
         return res.status(400).json({ error: 'User already exists.' });
