@@ -52,9 +52,12 @@
 * `yarn sequelize migration:create --name=create-users` - Creating the first migration to create the first DB table
 * `yarn sequelize db:migrate` - Run pending migrations
 
+<<<<<<< HEAD
 ### YUP
 * JavaScript object schema validator and object parser.
 * `yarn add yup`
 
 ### Bcryptjs
 * `yarn add bcryptjs`
+=======
+>>>>>>> da03945a07f9ec7d6dcb12c7c44e55b971b6e11b
