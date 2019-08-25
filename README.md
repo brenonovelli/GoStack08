@@ -9,15 +9,15 @@ Segundo a definição da RocketSeat o GoStack é um treinamento online, intensiv
 # Node.js
 ## Bibliotecas / Dependências
 * Express - Criação do servidor
-* Nodemon - **D** - Reinicia o servidor toda vez que é alterado um arquivo.
-* Sucrase - **D** - Permite usar as novas sintaxes do ES dentro do NodeJS.
+* Nodemon - `**D**` - Reinicia o servidor toda vez que é alterado um arquivo.
+* Sucrase - `**D**` - Permite usar as novas sintaxes do ES dentro do NodeJS.
 * Sequelize - Um ORM para NodeJs. Uma espécie de tradutor de códiodos JS para SQL.
-* Sequelize-cli - **D** - Interface de linha de comando.
+* Sequelize-cli - `**D**` - Interface de linha de comando.
 * Jsonwebtoken
 * Yup - Object schema validation
 * bcryptjs - Lidar com hashs
 
-_**D** - deve ser instalado com a flag '-D' indicando que é uma dependência de desenvolvimento._
+`**D**` - _Deve ser instalado com a flag '-D' indicando que é uma dependência de desenvolvimento._
 
 ## Configurações
 * Nodemon:
