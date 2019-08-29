@@ -20,8 +20,8 @@ class UserController {
     }
 
     // Validando usuário
-    const { email } = req.body;
-    const userExist = await User.findOne({ where: { email } });
+
+    const userExist = await User.findOne({ where: { email: req.body.email } });
     if (userExist) {
       return res.status(400).json({ error: 'User already exists.' });
     }
@@ -40,17 +40,13 @@ class UserController {
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
-      oldPassword: Yup.string()
-        .min(6)
-        .when('password', (password, field) =>
-          password ? field.required() : field
-        ),
+      oldPassword: Yup.string().min(6),
       password: Yup.string()
         .min(6)
         .when('oldPassword', (oldPassword, field) =>
           oldPassword ? field.required() : field
         ),
-      confimPassword: Yup.string().when('password', (password, field) =>
+      confirmPassword: Yup.string().when('password', (password, field) =>
         password ? field.required().oneOf([Yup.ref('password')]) : field
       ),
     });
@@ -65,19 +61,19 @@ class UserController {
     // Pegando os dados do usário no banco
     const user = await User.findByPk(req.userId);
 
-    if (email !== user.email){
-      const userExist = await User.findOne({ where: { email }});
+    if (email !== user.email) {
+      const userExist = await User.findOne({ where: { email } });
       if (userExist) {
-        return res.status(400).json({'User already exists.'})
+        return res.status(400).json({ errp: 'User already exists.' });
       }
     }
 
     // Checando senha
-    if(oldPassword && !(await user.checkPassword(oldPassword))){
-      return res.status(401).json({ error: 'Password does not match.'})
+    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+      return res.status(401).json({ error: 'Password does not match.' });
     }
 
-    const {id, name} = await user.update(req.body);
+    const { id, name } = await user.update(req.body);
 
     return res.json({
       id,

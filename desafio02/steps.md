@@ -52,12 +52,18 @@
 * `yarn sequelize migration:create --name=create-users` - Creating the first migration to create the first DB table
 * `yarn sequelize db:migrate` - Run pending migrations
 
-<<<<<<< HEAD
 ### YUP
 * JavaScript object schema validator and object parser.
 * `yarn add yup`
 
 ### Bcryptjs
 * `yarn add bcryptjs`
-=======
->>>>>>> da03945a07f9ec7d6dcb12c7c44e55b971b6e11b
+
+### Jsonwebtoken
+* `yarn add jsonwebtoken`
+*  O método verify do JWT usa por padrão de callback na chamada async. Para contornar o padrão callback e usar async/await podemos usar o `promisify` da lib `util` do próprio NodeJS.
+
+### Promisify from util
+* Função para "transformar" um função de callback em async/await
+* `import { promisify } from 'util';`
+* `util` Biblioteca que vem por padrão no Node
