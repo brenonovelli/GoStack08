@@ -37,9 +37,13 @@ Segundo a definição da RocketSeat o GoStack é um treinamento online, intensiv
 
 # Exercícios
 
+## Extras
+* [Wallpapers](https://github.com/brenonovelli/GoStack08/tree/master/wallpapers)
+
 ## Módulos
 * [Módulo 01](https://github.com/brenonovelli/GoStack08/tree/master/modulo01)
 * [Módulo 02](https://github.com/brenonovelli/GoStack08/tree/master/modulo02)
 
 ## Desafios
 * [Desafio 01](https://github.com/brenonovelli/GoStack08/tree/master/desafio01)
+* [Desafio 02](https://github.com/brenonovelli/GoStack08/tree/master/desafio02)
