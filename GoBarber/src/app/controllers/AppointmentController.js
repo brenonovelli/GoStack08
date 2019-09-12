@@ -85,7 +85,7 @@ class AppointmentController {
     // startOfHour => 'Zera' a hora. Se passar 19:30 transforma para 19:00
 
     if (isBefore(hourStart, new Date())) {
-      return res.status(400).json({ error: 'Past dates are note permitted' });
+      return res.status(400).json({ error: 'Past dates are not permitted' });
     }
 
     /**
@@ -108,7 +108,7 @@ class AppointmentController {
     const appointment = await Appointment.create({
       user_id: req.userId,
       provider_id,
-      date,
+      date: hourStart,
     });
 
     /**
