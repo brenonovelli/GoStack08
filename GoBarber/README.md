@@ -89,3 +89,32 @@ Anotações sobre o desenvolvimento da aplicação.
 ## Handlebars
 * Lib para lidar com template engines para emails
 * `yarn add express-handlebars nodemailer-express-handlebars`
+
+## Redis
+* Banco de dados não relacional chave/valor
+* `docker run --name redisbarber -p 6379:6379 -d -t redis:alpine`
+* `:alpine` para uma versão mais leve
+
+## Sistemas de filas
+* _Kue_ - Mais robusto.
+* _BeeQueue_ - Mais leve e mais performance.
+* Todos os trabalhos dentro de filas são chamados de _jobs_. Nomenclatura herdada do termo background jobs.
+
+## BeeQueue
+* Ferramenta de background jobs(fila) dentro do Node. Menos funcionalidades e mais perfomance.
+* `yarn add bee-queue`
+
+## Sentry
+* Tratar erros
+* `sentry.io`
+
+## Express Async Error
+* Resolve o problema do express não captar erros quando usa-se async.
+* `yarn add express-async-errors`
+
+## Youch
+* Entrega o erro de forma mais amigável
+* `yarn add youch`
+
+## Dotenv
+`yarn add dotenv`
