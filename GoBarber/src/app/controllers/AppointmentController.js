@@ -132,6 +132,10 @@ class AppointmentController {
   }
 
   async delete(req, res) {
+    /**
+     * Pega o appointment.
+     * E mais dados para usar no email de cancelamento.
+     */
     const appointment = await Appointment.findByPk(req.params.id, {
       include: [
         {

@@ -55,7 +55,7 @@ class UserController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    // Pegando o digitado na requisição
+    // Pegando o digitado na requisição para usar
     const { email, oldPassword } = req.body;
 
     // Pegando os dados do usário no banco
