@@ -22,18 +22,6 @@ class CancellationMail {
      * A melhor forma para controlar ações que levam mais tempo, não precisam finalizar
      * naquele momento e queremos ter controle sobre o processo é usar filas/jobs.
      */
-    const testeFormat = format(
-      parseISO(appointment.date),
-      "'dia' dd 'de' MMMM', às' H:mm'h'",
-      {
-        locale: pt,
-      }
-    );
-    console.log(`format() e parseISO(): ${testeFormat}`);
-    const teste = parseISO(appointment.date);
-    console.log(teste);
-    const teste2 = appointment.date;
-    console.log(`Sem: ${teste2}`);
 
     await Mail.sendMail({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,

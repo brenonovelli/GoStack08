@@ -101,12 +101,13 @@ Anotações sobre o desenvolvimento da aplicação.
 * Todos os trabalhos dentro de filas são chamados de _jobs_. Nomenclatura herdada do termo background jobs.
 
 ## BeeQueue
-* Ferramenta de background jobs(fila) dentro do Node. Menos funcionalidades e mais perfomance.
+* Ferramenta de background jobs(fila) dentro do Node. Menos funcionalredreidades e mais perfomance.
 * `yarn add bee-queue`
 
 ## Sentry
 * Tratar erros
 * `sentry.io`
+* `yarn add @sentry/node@5.6.2`
 
 ## Express Async Error
 * Resolve o problema do express não captar erros quando usa-se async.
