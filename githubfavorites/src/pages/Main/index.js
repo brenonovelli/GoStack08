@@ -121,7 +121,9 @@ export default class Main extends Component {
 
               <UserActionsButtons>
                 <ProfileButton onPress={() => this.handleNavigate(item)}>
-                  <ProfileButtonText>Ver perfil</ProfileButtonText>
+                  <ProfileButtonText>
+                    View starred repositories
+                  </ProfileButtonText>
                 </ProfileButton>
                 <DeleteButton onPress={() => this.handleDelete(item)}>
                   <Icon name="delete" size={20} color="#fff" />

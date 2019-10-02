@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import { ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import api from '../../services/api';
 
 import {
@@ -24,56 +24,75 @@ export default class User extends Component {
 
   state = {
     stars: [],
-    loading: false,
+    loading: true,
     page: 1,
     refreshing: false,
+    lastPage: false,
   };
 
   async componentDidMount() {
-    this.setState({ loading: true });
-    const { navigation } = this.props;
-    const user = navigation.getParam('user');
-
-    const response = await api.get(`/users/${user.login}/starred`);
-
-    this.setState({ stars: response.data, loading: false });
+    this.load();
   }
 
-  refreshList = () => {};
+  handleNavigate = repository => {
+    const { navigation } = this.props;
 
-  loadMore = async () => {
-    this.setState({ loading: true });
+    navigation.navigate('Repository', { repository });
+  };
 
-    const { page } = this.state;
-    const nextPage = page + 1;
+  refreshList = async () => {
+    this.setState({ refreshing: true }, this.load);
+  };
+
+  load = async (page = 1) => {
+    const { stars } = this.state;
     const { navigation } = this.props;
     const user = navigation.getParam('user');
 
-    const response = await api.get(
-      `/users/${user.login}/starred?page=${nextPage}`
-    );
+    const response = await api.get(`/users/${user.login}/starred`, {
+      params: { page },
+    });
+
+    const lengthReponse = Object.keys(response.data).length;
 
     this.setState({
-      stars: response.data,
-      page: nextPage,
+      stars: page >= 2 ? [...stars, ...response.data] : response.data,
+      page,
       loading: false,
+      refreshing: false,
+      lastPage: lengthReponse === 0,
     });
+  };
+
+  loadMore = async () => {
+    const { lastPage, refreshing } = this.state;
+
+    if (!refreshing && !lastPage) {
+      this.setState({ refreshing: true });
+
+      const { page } = this.state;
+
+      const nextPage = page + 1;
+
+      this.load(nextPage);
+    }
   };
 
   render() {
     const { navigation } = this.props;
-    const { stars, loading, refreshing, page } = this.state;
+    const { stars, loading, refreshing } = this.state;
 
     const user = navigation.getParam('user');
 
     return (
       <Container>
         <Header>
-          <Text>Página: {page}</Text>
           <Avatar source={{ uri: user.avatar }} />
           <Name>{user.name}</Name>
           <Bio>{user.bio}</Bio>
         </Header>
+
+        {loading && <ActivityIndicator color="#666" />}
 
         <Stars
           onEndReachedThreshold={0.2} // Carrega mais itens quando chegar em 20% do fim
@@ -84,7 +103,7 @@ export default class User extends Component {
           data={stars}
           keyExtractor={star => String(star.id)}
           renderItem={({ item }) => (
-            <Starred>
+            <Starred onPress={() => this.handleNavigate(item)}>
               <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
               <Info>
                 <Title>{item.name}</Title>
@@ -94,7 +113,7 @@ export default class User extends Component {
           )}
         />
 
-        {loading && <ActivityIndicator color="#666" />}
+        {refreshing && <ActivityIndicator color="#666" />}
       </Container>
     );
   }
@@ -103,5 +122,6 @@ export default class User extends Component {
 User.propTypes = {
   navigation: propTypes.shape({
     getParam: propTypes.func,
+    navigate: propTypes.func,
   }).isRequired,
 };

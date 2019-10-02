@@ -81,7 +81,7 @@ export const ProfileButton = styled(RectButton)`
   flex: 1;
 `;
 export const ProfileButtonText = styled.Text`
-  font-size: 14px;
+  font-size: 11px;
   font-weight: bold;
   color: #fff;
   text-transform: uppercase;
