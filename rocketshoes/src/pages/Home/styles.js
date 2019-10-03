@@ -1,5 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { darken } from 'polished';
+
+const fade = keyframes`
+  0%{
+    opacity: .2;
+  }
+  50%{
+    opacity: .1;
+  }
+  100%{
+    opacity: .2;
+  }
+`;
 
 export const ProductList = styled.ul`
   display: grid;
@@ -7,7 +19,42 @@ export const ProductList = styled.ul`
   grid-gap: 1.25rem;
   list-style: none;
 
+  &:empty {
+    animation: ${fade} 2s ease-in-out infinite;
+
+    height: 424px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(#ccc 100%, transparent 0),
+      linear-gradient(#aaa 100%, transparent 0),
+      linear-gradient(#aaa 100%, transparent 0),
+      linear-gradient(#aaa 100%, transparent 0),
+      linear-gradient(#666 100%, transparent 0);
+
+    opacity: 0.1;
+    background-size: 29% 62%, 29% 1.25rem, 15% 1rem, 29% 3rem, 32% 100%;
+    background-position: 97.5% 5%, 97.5% 70%, 81.5% 76%, 97.5% 96%, top right;
+
+    position: relative;
+
+    &:after,
+    &:before {
+      content: '';
+      height: 424px;
+
+      background-repeat: no-repeat;
+      background-image: linear-gradient(#ccc 100%, transparent 0),
+        linear-gradient(#aaa 100%, transparent 0),
+        linear-gradient(#aaa 100%, transparent 0),
+        linear-gradient(#aaa 100%, transparent 0),
+        linear-gradient(#666 100%, transparent 0);
+
+      background-size: 92% 62%, 92% 1.25rem, 50% 1rem, 92% 3rem, 100% 100%;
+      background-position: 50% 5%, 50% 70%, 8% 76%, 50% 96%, top center;
+    }
+  }
+
   li {
+    min-height: 424px;
     display: flex;
     flex-direction: column;
     background: #fff;

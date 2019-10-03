@@ -7,7 +7,7 @@ import api from '../../services/api';
 
 import * as CartActions from '../../store/modules/cart/actions';
 
-import { ProductList } from './styles';
+import { ProductList, FakeItem } from './styles';
 
 class Home extends Component {
   state = {
@@ -32,12 +32,12 @@ class Home extends Component {
   };
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     const { amount } = this.props;
 
     return (
       <ProductList>
-        {products.map(product => (
+        {/* {products.map(product => (
           <li key={product.id}>
             <img src={product.image} alt={product.title} />
             <strong>{product.title}</strong>
@@ -55,7 +55,7 @@ class Home extends Component {
               <span>Adicionar ao carrinho</span>
             </button>
           </li>
-        ))}
+        ))} */}
       </ProductList>
     );
   }
