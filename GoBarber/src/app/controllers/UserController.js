@@ -1,8 +1,23 @@
 import * as Yup from 'yup';
 // YUP -> JavaScript object schema validator and object parser.
 import User from '../models/User';
+import File from '../models/File';
 
 class UserController {
+  async index(req, res) {
+    const users = await User.findAll({
+      attributes: ['id', 'name', 'email', 'provider', 'avatar_id'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
+    return res.json(users);
+  }
+
   // Store
   async store(req, res) {
     // Validando os dados
@@ -43,6 +58,7 @@ class UserController {
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
+      provider: Yup.bool(),
       oldPassword: Yup.string().min(6),
       password: Yup.string()
         .min(6)
@@ -79,13 +95,22 @@ class UserController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, provider } = await user.update(req.body);
+    await user.update(req.body);
+
+    const { id, name, avatar, provider } = await User.findByPk(req.userId, {
+      include: {
+        model: File,
+        as: 'avatar',
+        attributes: ['id', 'path', 'url'],
+      },
+    });
 
     return res.json({
       id,
       name,
       email,
       provider,
+      avatar,
     });
   }
 }

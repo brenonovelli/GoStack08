@@ -6,6 +6,7 @@ import express from 'express';
 // Sintaxe nova permitida usar por causa do sucrase
 // Sintaxe antiga: const express = require("express");
 import path from 'path';
+import cors from 'cors';
 import Youch from 'youch';
 import * as Sentry from '@sentry/node';
 import 'express-async-errors';
@@ -29,6 +30,7 @@ class App {
 
   middlewares() {
     this.server.use(Sentry.Handlers.requestHandler());
+    this.server.use(cors());
     // Preparando para receber req no formato json
     this.server.use(express.json());
     // Preparando para receber arquivos estáticos

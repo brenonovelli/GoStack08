@@ -20,6 +20,7 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
+routes.get('/users/list', UserController.index);
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware); // O que vier após será impactado
