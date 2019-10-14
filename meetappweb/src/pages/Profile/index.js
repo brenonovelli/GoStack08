@@ -1,37 +1,36 @@
 import React from 'react';
-// import React, { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
-// import { signOut } from '~/store/modules/auth/actions';
-// import { updateProfileRequest } from '~/store/modules/user/actions';
-
 import { MdAddCircleOutline } from 'react-icons/md';
+import { updateProfileRequest } from '~/store/modules/user/actions';
+
 import { Container, Button } from './styles';
 
 export default function Profile() {
-  // const profile = useSelector(state => state.user.profile);
-  // const dispatch = useDispatch();
+  const profile = useSelector(state => state.user.profile);
+  const dispatch = useDispatch();
 
-  // function handleSubmit(data) {
-  //   dispatch(updateProfileRequest(data));
-  // }
-
-  // function handleSignOut() {
-  //   dispatch(signOut());
-  // }
+  function handleSubmit(data) {
+    dispatch(updateProfileRequest(data));
+  }
 
   return (
     <Container>
-      {/* <Form initialData={profile} onSubmit={handleSubmit}> */}
-      <Form>
+      <header>
+        <nav>
+          <Link to="/dashboard">{'<'} voltar para o dashboard</Link>
+        </nav>
+      </header>
+      <Form initialData={profile} onSubmit={handleSubmit}>
         <Input name="name" placeholder="Nome Completo" type="text" />
         <Input name="email" placeholder="Seu endereço de e-mail" type="email" />
 
         <hr />
 
         <Input
-          name="oldPpassword"
+          name="oldPassword"
           placeholder="Sua senha atual"
           type="password"
         />

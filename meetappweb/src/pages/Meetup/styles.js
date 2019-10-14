@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 940px;
@@ -20,17 +21,12 @@ export const Container = styled.div`
 export const Button = styled.button`
   display: flex;
   align-items: center;
-  background-color: #f94d6a;
   border-radius: 0.25rem;
   padding: 0.75rem 1.25rem;
   font-weight: bold;
   color: #fff;
-  transition: opacity 0.3s ease-in-out;
   + button {
     margin-left: 1rem;
-  }
-  &:hover {
-    opacity: 0.9;
   }
   svg {
     margin-right: 0.5rem;
@@ -38,6 +34,9 @@ export const Button = styled.button`
 `;
 export const ButtonSecondary = styled(Button)`
   background-color: #4dbaf9;
+  &:hover {
+    background-color: ${darken(0.1, '#4dbaf9')};
+  }
 `;
 
 export const MeetupContent = styled.main`

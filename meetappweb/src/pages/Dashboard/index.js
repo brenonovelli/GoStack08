@@ -1,22 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
-
 import { Container, MeetupList, Meetup } from './styles';
 
 export default function Dashboard() {
-  function handleAddMeetup() {}
-
   return (
     <Container>
       <header>
         <h1>Meus meetups</h1>
         <aside>
           <nav>
-            <button type="button" onClick={handleAddMeetup}>
+            <Link to="/meetup/add">
               <MdAddCircleOutline size={20} />
-              Novo Mettup
-            </button>
+              Novo Meetup
+            </Link>
           </nav>
         </aside>
       </header>

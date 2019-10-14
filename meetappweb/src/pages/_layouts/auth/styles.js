@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
 
 export const Wrapper = styled.div`
   min-height: 100vh;
@@ -27,16 +26,20 @@ export const Content = styled.div`
     }
 
     button {
-      background-color: #f94d6a;
-      border-radius: 0.25rem;
       padding: 0.75rem 1.25rem;
       font-weight: bold;
       color: #fff;
       text-align: center;
-      transition: background-color 0.3s ease-in-out;
-      &:hover {
-        background-color: ${darken(0.05, '#f94d6a')};
-      }
+    }
+
+    span {
+      color: #f94d6a;
+      align-self: flex-end;
+      margin-top: -0.5rem;
+      margin-bottom: 0.75rem;
+      padding: 0.1rem 0.25rem;
+      border-radius: 0 0 0.25rem 0.25rem;
+      font-size: 0.75rem;
     }
   }
   a {

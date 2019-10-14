@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+import { darken } from 'polished';
+
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
@@ -34,6 +36,10 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
     color: #fff;
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: #f94d6a;
+    }
   }
 
   ul{
@@ -42,5 +48,34 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
+    color: #fff;
+    background-color: #f94d6a;
+    border-radius: 0.25rem;
+    transition: background-color 0.5s ease-in-out;
+    &:hover {
+      background-color: ${darken(0.05, '#f94d6a')};
+    }
+    /* Efeito hover - Um <Link> no dashboard também usa o efeito. */
+    position: relative;
+    overflow: hidden;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    &:hover {
+      &:after {
+        width: 120%;
+        padding-top: 120%;
+        opacity: 0;
+        transition: all 0.5s ease-out;
+      }
+    }
   }
 `;

@@ -80,3 +80,9 @@ settings: {
 
 - `yarn add @rocketseat/unform`
 - `yarn add yup`
+
+## Configurando Redux
+
+- `yarn add redux redux-saga react-redux reactotron-redux reactotron-redux-saga redux-persist immer`
+
+* `yarn add react-datepicker`

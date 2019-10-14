@@ -18,6 +18,9 @@ export const Container = styled.div`
     textarea {
       height: 200px;
     }
+    > div {
+      width: 100%;
+    }
   }
 `;
 

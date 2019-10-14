@@ -38,17 +38,18 @@ export const Profile = styled.div`
       margin-top: 0.125rem;
       font-size: 0.825rem;
       color: #999;
+      &:hover {
+        color: #d44059;
+      }
     }
   }
   button {
-    background-color: #d44059;
     border-radius: 0.25rem;
     padding: 0.75rem 1.25rem;
     font-weight: bold;
     color: #fff;
-    transition: opacity 0.3s ease-in-out;
-    &:hover {
-      opacity: 0.75;
-    }
+
+    position: relative;
+    overflow: hidden;
   }
 `;
