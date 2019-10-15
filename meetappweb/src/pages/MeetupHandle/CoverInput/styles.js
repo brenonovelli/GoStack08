@@ -1,18 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-const flash = keyframes`
-  0%{
-    opacity: 0;
-  }
-  50%{
-    opacity: 1;
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  100%{
-    opacity: 0;
-  }
-`;
 export const Container = styled.div`
   align-self: center;
   margin-bottom: 2rem;
@@ -39,8 +26,12 @@ export const Container = styled.div`
       }
       &::after {
         content: '';
-        background-color: white;
-        background: white;
+
+        background: radial-gradient(
+          farthest-side at 60% 55%,
+          white,
+          transparent
+        );
         position: absolute;
         top: 4%;
         left: 50%;
@@ -54,18 +45,15 @@ export const Container = styled.div`
     }
 
     &:hover {
-      opacity: 0.9;
       span {
         color: #f94d6a;
-        &::after {
-          animation: ${flash} 0.2s ease-in;
-        }
       }
     }
 
     img {
       width: 100%;
       height: 300px;
+      object-fit: cover;
       background-color: rgba(0, 0, 0, 0.4);
       display: block;
     }

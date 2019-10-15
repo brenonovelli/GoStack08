@@ -7,16 +7,24 @@ const INITIAL_STATE = {
 export default function meetup(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
-      case '@auth/CREATE_MEETUP_SUCCESS': {
-        draft.meetup = action.payload.meetup;
+      case '@meetup/CREATE_MEETUP_SUCCESS': {
+        draft.data = action.payload.meetup;
         break;
       }
-      case '@user/CREATE_MEETUP_SUCCESS': {
-        draft.meetup = action.payload.profile;
+      case '@meetup/DETAILS_MEETUP': {
+        draft.data = action.payload.meetup;
         break;
       }
-      case '@auth/CREATE_MEETUP_FAILURE': {
-        draft.meetup = null;
+      case '@meetup/DELETE_MEETUP_SUCCESS': {
+        draft.data = null;
+        break;
+      }
+      case '@meetup/CREATE_MEETUP_FAILURE': {
+        draft.data = null;
+        break;
+      }
+      case '@meetup/details_MEETUP_CLEAR': {
+        draft.data = null;
         break;
       }
       default:

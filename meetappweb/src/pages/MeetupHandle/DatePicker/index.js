@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { useField } from '@rocketseat/unform';
+import { parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -12,7 +13,7 @@ export default function DatePicker({ name }) {
 
   useEffect(() => {
     if (defaultValue) {
-      setSelected(defaultValue);
+      setSelected(parseISO(defaultValue));
     }
   }, [defaultValue]);
 

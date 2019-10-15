@@ -1,63 +1,61 @@
 import React from 'react';
-
-// import { ButtonEdit, ButtonDelete } from '~/components/Buttons';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { MdEdit, MdDeleteForever, MdToday, MdMyLocation } from 'react-icons/md';
-import cover from '~/assets/cover.jpg';
 
+import cover from '~/assets/cover.jpg';
+import history from '~/services/history';
+import { deleteMeetupRequest } from '~/store/modules/meetup/actions';
 import { Container, Button, ButtonSecondary, MeetupContent } from './styles';
 
 export default function Meetup() {
+  const meetup = useSelector(state => state.meetup.data);
+  const dispatch = useDispatch();
+
   function handleEditMeetup() {
-    console.tron.log('Editar');
+    history.push('/meetup/edit/');
   }
 
   function handleDeleteMeetup() {
-    console.tron.log('Deletar');
+    dispatch(deleteMeetupRequest(meetup.id));
   }
 
   return (
     <Container>
       <header>
-        <h1>Meus meetups</h1>
-        <aside>
-          <nav>
-            <ButtonSecondary
-              type="button"
-              onClick={handleEditMeetup}
-              secondary={false}
-            >
-              <MdEdit size={20} />
-              Editar
-            </ButtonSecondary>
-
-            <Button type="button" onClick={handleDeleteMeetup}>
-              <MdDeleteForever size={20} />
-              Cancelar
-            </Button>
-          </nav>
-        </aside>
+        <nav>
+          <Link to="/dashboard">{'<'} voltar para o dashboard</Link>
+        </nav>
       </header>
       <MeetupContent>
+        <header>
+          <h1>{meetup.title}</h1>
+          <aside>
+            <nav>
+              <ButtonSecondary type="button" onClick={handleEditMeetup}>
+                <MdEdit size={20} />
+                Editar
+              </ButtonSecondary>
+
+              <Button type="button" onClick={() => handleDeleteMeetup()}>
+                <MdDeleteForever size={20} />
+                Cancelar
+              </Button>
+            </nav>
+          </aside>
+        </header>
         <img src={cover} alt="" />
         <div>
-          <p>
-            O Meetup de React Native é um evento que reúne a comunidade de
-            desenvolvimento mobile utilizando React a fim de compartilhar
-            conhecimento. Todos são convidados.
-          </p>
-          <p>
-            Caso queira participar como palestrante do meetup envie um e-mail
-            para organizacao@meetuprn.com.br.
-          </p>
+          <p>{meetup.description}</p>
         </div>
         <footer>
           <time>
             <MdToday size={18} />
-            24 de Junho, às 20h
+            {meetup.formattedDate}
           </time>
           <address>
             <MdMyLocation size={18} />
-            Estrada dos Bandeirantes, 15001 - Bloco 5 - 209
+            {meetup.local}
           </address>
         </footer>
       </MeetupContent>

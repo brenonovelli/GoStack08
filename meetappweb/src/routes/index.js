@@ -6,7 +6,7 @@ import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Dashboard from '~/pages/Dashboard';
 import Meetup from '~/pages/Meetup';
-import MeetupAdd from '~/pages/MeetupAdd';
+import MeetupHandle from '~/pages/MeetupHandle';
 import Profile from '~/pages/Profile';
 
 export default function Routes() {
@@ -16,9 +16,9 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
-      <Route path="/meetups/details/:id" component={Meetup} isPrivate />
-      <Route path="/meetup/add" component={MeetupAdd} isPrivate />
-      <Route path="/meetup/edit" component={MeetupAdd} isPrivate />
+      <Route path="/meetup/details" component={Meetup} isPrivate />
+      <Route path="/meetup/add" component={MeetupHandle} isPrivate />
+      <Route path="/meetup/edit" component={MeetupHandle} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
 
       <Route path="/" component={() => <h1>Erro 404</h1>} />
