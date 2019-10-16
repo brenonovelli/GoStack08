@@ -16,6 +16,7 @@ export const Container = styled.div`
           align-items: center;
           border-radius: 0.25rem;
           padding: 0.75rem 1.25rem;
+          font-size: 1rem;
           font-weight: bold;
           color: #fff;
           background-color: #f94d6a;
@@ -61,15 +62,17 @@ export const MeetupList = styled.ul`
 `;
 export const Meetup = styled.li`
   background-color: rgba(0, 0, 0, 0.1);
-  padding: 1.25rem 2rem;
   border-radius: 0.25rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   transition: all 0.75s ease-in-out;
   cursor: pointer;
   + li {
     margin-top: 0.625rem;
+  }
+  a {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.25rem 2rem;
   }
   strong {
     flex-grow: 1;
@@ -94,4 +97,25 @@ export const Meetup = styled.li`
       padding: 0 2.5rem;
     }
   }
+`;
+
+export const Pagination = styled.nav`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  strong {
+    flex-grow: 1;
+    grid-column: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+export const PreviousButton = styled.div`
+  grid-column: 1;
+  text-align: left;
+`;
+export const NextButton = styled.div`
+  grid-column: 3;
+  text-align: right;
 `;

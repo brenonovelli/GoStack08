@@ -1,5 +1,7 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { parseISO, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import api from '~/services/api';
 import history from '~/services/history';
 
@@ -28,7 +30,7 @@ export function* createMeetup({ payload }) {
 
     yield put(createMeetupSuccess(response.data));
 
-    history.push('/meetup/details/');
+    history.push('/meetups/details/');
   } catch (err) {
     toast.error('Erro ao criar meetup. Confira os dados e tente novamente.');
     yield put(createMeetupFailure());
@@ -51,7 +53,19 @@ export function* deleteMeetup({ payload }) {
   }
 }
 
+export function* updateMeetups({ payload }) {
+  try {
+    const { meetup } = payload;
+    yield call(api.put, `meetups/`, meetup);
+
+    toast.success('Meetup alterado com com sucesso!');
+  } catch (err) {
+    toast.error('Erro ao atualizar o meetup. Tente novamente.');
+  }
+}
+
 export default all([
-  takeLatest('@meetup/CREATE_MEETUP', createMeetup),
-  takeLatest('@meetup/DELETE_MEETUP', deleteMeetup),
+  takeLatest('@meetups/UPDATE_MEETUP', updateMeetups),
+  takeLatest('@meetups/CREATE_MEETUP', createMeetup),
+  takeLatest('@meetups/DELETE_MEETUP', deleteMeetup),
 ]);

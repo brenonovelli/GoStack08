@@ -16,9 +16,9 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
-      <Route path="/meetup/details" component={Meetup} isPrivate />
-      <Route path="/meetup/add" component={MeetupHandle} isPrivate />
-      <Route path="/meetup/edit" component={MeetupHandle} isPrivate />
+      <Route path="/meetups/details/:id" component={Meetup} isPrivate />
+      <Route path="/meetups/add/" component={MeetupHandle} isPrivate />
+      <Route path="/meetups/edit/:id" component={MeetupHandle} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
 
       <Route path="/" component={() => <h1>Erro 404</h1>} />

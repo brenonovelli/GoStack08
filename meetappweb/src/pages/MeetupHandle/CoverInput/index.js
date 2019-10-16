@@ -1,29 +1,54 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import { toast } from 'react-toastify';
 import { useField } from '@rocketseat/unform';
 import { MdCameraAlt } from 'react-icons/md';
 import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function AvatarInput() {
-  const meetup = useSelector(state => state.meetup.data);
-
+export default function AvatarInput({ bannerId }) {
   const { defaultValue, registerField } = useField('cover');
-
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
 
   const ref = useRef();
 
-  const meetupUrlBanner = meetup && meetup.File.url;
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (meetup) {
-      setPreview(meetupUrlBanner);
+    if (bannerId) {
+      (async function loadMeetups() {
+        setLoading(true);
+        try {
+          const response = await api.get(`files/${bannerId}`);
+          setPreview(response.data.url);
+          setFile(response.data.id);
+        } catch (err) {
+          toast.error(
+            `Erro ao carregar o banner. Atualize a página e tente novamente.`
+          );
+        }
+        setLoading(false);
+      })();
     }
-  }, [meetup, meetupUrlBanner]);
+  }, [bannerId]);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setPreview(defaultValue.url);
+      setFile(defaultValue.id);
+    }
+  }, [defaultValue]);
+
+  async function handleChange(e) {
+    const data = new FormData();
+    data.append('file', e.target.files[0]);
+    const response = await api.post('files', data);
+    const { id, url } = response.data;
+
+    setFile(id);
+    setPreview(url);
+  }
 
   useEffect(() => {
     if (ref.current) {
@@ -31,22 +56,12 @@ export default function AvatarInput() {
         name: 'banner',
         ref: ref.current,
         path: 'dataset.file',
+        clearValue: pickerRef => {
+          pickerRef.clear();
+        },
       });
     }
   }, [ref.current]); // eslint-disable-line
-
-  async function handleChange(e) {
-    const data = new FormData();
-
-    data.append('file', e.target.files[0]);
-
-    const response = await api.post('files', data);
-
-    const { id, url } = response.data;
-
-    setFile(id);
-    setPreview(url);
-  }
 
   return (
     <Container>

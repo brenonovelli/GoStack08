@@ -43,6 +43,7 @@ export default function DatePicker({ name }) {
         dateFormat="MM/dd/yyyy h:mm aa"
         minDate={new Date()}
         autoComplete="off"
+        placeholderText="Escolha uma data e horário"
       />
       {error && <span>{error}</span>}
     </>
