@@ -3,8 +3,23 @@ import { Op } from 'sequelize';
 import { parseISO, isBefore, startOfDay, endOfDay } from 'date-fns';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
+import File from '../models/File';
 
 class MeetupController {
+  async show(req, res) {
+    const meetup = await Meetup.findByPk(req.params.id, {
+      include: [
+        {
+          model: File,
+          as: 'cover',
+          attributes: ['id', 'name', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json({ meetup });
+  }
+
   async index(req, res) {
     const where = {};
     const page = req.query.page || 1; // O valor passado ou 1
@@ -62,13 +77,27 @@ class MeetupController {
     /**
      * Create and save meetup
      */
-    const meetup = await Meetup.create({
+    const meetupCreated = await Meetup.create({
       user_id: req.userId,
       date,
       title,
       description,
       local,
       banner,
+    });
+
+    const meetup = await Meetup.findByPk(meetupCreated.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name', 'email'],
+        },
+        {
+          model: File,
+          as: 'cover',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
     });
 
     return res.json(meetup);

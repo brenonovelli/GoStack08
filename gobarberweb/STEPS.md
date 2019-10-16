@@ -1,6 +1,6 @@
 - `yarn add prop-types`
 - `yarn add react-router-dom`
-- `yarn add history yarn`
+- `yarn add history`
 - `yarn add reactotron-react-js`
 - `yarn add styled-components`
 - `yarn add polished`

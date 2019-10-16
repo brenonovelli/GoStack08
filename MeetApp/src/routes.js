@@ -23,6 +23,7 @@ routes.get('/meetups', MeetupController.index);
 routes.post('/meetups', MeetupController.store);
 routes.put('/meetups', MeetupController.update);
 routes.delete('/meetups/:id', MeetupController.delete);
+routes.get('/meetups/:id', MeetupController.show);
 
 routes.get('/registration/', RegistrationController.index);
 
@@ -31,5 +32,6 @@ routes.post('/meetups/:meetupId/registration', RegistrationController.store);
 routes.put('/users', UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/files/:id', FileController.index);
 
 export default routes;

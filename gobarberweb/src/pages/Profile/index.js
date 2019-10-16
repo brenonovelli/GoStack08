@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
@@ -32,7 +32,7 @@ export default function Profile() {
         <hr />
 
         <Input
-          name="oldPpassword"
+          name="oldPassword"
           placeholder="Sua senha atual"
           type="password"
         />
