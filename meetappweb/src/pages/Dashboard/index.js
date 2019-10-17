@@ -22,7 +22,7 @@ export default function Dashboard() {
   const [hasNextPage, setHasNextPage] = useState(false);
 
   const handlePagination = useCallback(async () => {
-    const response = await api.get(`meetups?page=${page + 1}`);
+    const response = await api.get(`organization?page=${page + 1}`);
 
     if (response.data.length > 0) {
       setHasNextPage(true);
@@ -35,7 +35,7 @@ export default function Dashboard() {
     (async function loadMeetups() {
       setLoading(true);
       try {
-        const response = await api.get(`meetups?page=${page}`);
+        const response = await api.get(`organization?page=${page}`);
 
         const data = response.data.map(meetup => {
           const dateMeetup = parseISO(meetup.date);
@@ -81,41 +81,47 @@ export default function Dashboard() {
           </nav>
         </aside>
       </header>
-      {meetups.length > 0 ? (
+      {loading ? (
+        <strong>Carregando</strong>
+      ) : (
         <>
-          <MeetupList>
-            {meetups.map(meetup => (
-              <Meetup key={meetup.id}>
-                <Link to={`/meetups/details/${meetup.id}`}>
-                  <strong>{meetup.title}</strong>
-                  <time>{meetup.formattedDate}</time>
-                  <MdChevronRight size={20} />
-                </Link>
-              </Meetup>
-            ))}
-          </MeetupList>
-          {(hasNextPage || page > 1) && (
-            <Pagination>
-              {page > 1 && (
-                <PreviousButton>
-                  <button type="button" onClick={handlePreviousPage}>
-                    Página anterior
-                  </button>
-                </PreviousButton>
+          {meetups.length > 0 ? (
+            <>
+              <MeetupList>
+                {meetups.map(meetup => (
+                  <Meetup key={meetup.id}>
+                    <Link to={`/meetups/details/${meetup.id}`}>
+                      <strong>{meetup.title}</strong>
+                      <time>{meetup.formattedDate}</time>
+                      <MdChevronRight size={20} />
+                    </Link>
+                  </Meetup>
+                ))}
+              </MeetupList>
+              {(hasNextPage || page > 1) && (
+                <Pagination>
+                  {page > 1 && (
+                    <PreviousButton>
+                      <button type="button" onClick={handlePreviousPage}>
+                        Página anterior
+                      </button>
+                    </PreviousButton>
+                  )}
+                  <strong>Página {page}</strong>
+                  {hasNextPage && (
+                    <NextButton>
+                      <button type="button" onClick={handleNextPage}>
+                        Próxima página
+                      </button>
+                    </NextButton>
+                  )}
+                </Pagination>
               )}
-              <strong>Página {page}</strong>
-              {hasNextPage && (
-                <NextButton>
-                  <button type="button" onClick={handleNextPage}>
-                    Próxima página
-                  </button>
-                </NextButton>
-              )}
-            </Pagination>
+            </>
+          ) : (
+            <p>Você ainda não tem meetups. Crie um agora.</p>
           )}
         </>
-      ) : (
-        <p>Você ainda não tem meetups. Crie um agora.</p>
       )}
     </Container>
   );

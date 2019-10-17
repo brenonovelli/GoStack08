@@ -42,6 +42,7 @@ class MeetupController {
           attributes: ['name', 'email'],
         },
       ],
+      order: ['date'],
       limit: 10,
       offset: 10 * page - 10,
     });

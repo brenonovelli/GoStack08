@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
@@ -8,17 +7,13 @@ import pt from 'date-fns/locale/pt';
 import { MdEdit, MdDeleteForever, MdToday, MdMyLocation } from 'react-icons/md';
 
 import api from '~/services/api';
-import { deleteMeetupRequest } from '~/store/modules/meetups/actions';
+import history from '~/services/history';
 import { Container, Button, MeetupContent } from './styles';
 
 export default function Meetup({ match }) {
   const [meetup, setMeetup] = useState();
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
   const idMeetup = match.params.id;
-  useEffect(() => {
-    console.tron.log(meetup);
-  }, [meetup]);
 
   useEffect(() => {
     (async function loadMeetup() {
@@ -40,8 +35,16 @@ export default function Meetup({ match }) {
     })();
   }, [idMeetup]);
 
-  function handleDeleteMeetup() {
-    dispatch(deleteMeetupRequest(idMeetup));
+  async function handleDeleteMeetup() {
+    try {
+      await api.delete(`meetups/${idMeetup}`);
+
+      toast.success('Meetup deletado com com sucesso!');
+
+      history.push('/dasboard');
+    } catch (err) {
+      toast.error('Erro ao deletar meetup. Tente novamente.');
+    }
   }
 
   return (
@@ -95,12 +98,9 @@ export default function Meetup({ match }) {
 }
 
 Meetup.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     }),
   }).isRequired,
 };
